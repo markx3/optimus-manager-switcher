@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+CURRENT_GPU=$(optimus-manager --status | awk '/Current/ {print $5}')
+
+
+case $BLOCK_BUTTON in
+    1) optimus-manager --switch $(if [ "${CURRENT_GPU}" = "intel" ]; then echo "nvidia"; else echo "intel"; fi) --no-confirm ;;
+esac
+
+echo "${CURRENT_GPU}"
